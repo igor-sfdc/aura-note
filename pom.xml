@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!-- these properties can be set by passing in -D<property_name>=<property_value> -->
     <properties>
-		<!-- Update auraframework version here to use up-to-date version -->
+        <!-- Update auraframework version here to use up-to-date version -->
         <aura.framework.version>0.305-SNAPSHOT</aura.framework.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipUnitTests>true</skipUnitTests>
