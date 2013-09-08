@@ -1,9 +1,11 @@
-This fork is an OSGi-adapted version of Aura-not project. It should be used
-as a submodule of aurframework parent project from:
+This fork is an OSGi-adapted version of the original Aura-note project. It should be used
+as a submodule of Aura framework project from:
 
-https://github.com/igor-sfdc/aura
+    https://github.com/igor-sfdc/aura
 
-cloned under the root aura folder. More detailed instructions are to be posted.
+The directions on how to set it up to run alongside Aura framework OSGi bundle are provided in the parent project:
+
+    https://github.com/igor-sfdc/aura/blob/master/README.osgi
 
 
 
