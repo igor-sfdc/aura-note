@@ -4,7 +4,7 @@
     <!-- these properties can be set by passing in -D<property_name>=<property_value> -->
     <properties>
         <!-- Update auraframework version here to use up-to-date version -->
-        <aura.framework.version>0.334-SNAPSHOT</aura.framework.version>
+        <aura.framework.version>0.367-SNAPSHOT</aura.framework.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipUnitTests>true</skipUnitTests>
     </properties>

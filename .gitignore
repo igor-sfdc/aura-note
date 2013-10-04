@@ -7,3 +7,5 @@ target
 chromedriver.log
 aura-note Sauce.launch
 src/clipper/.tmp_options.html*
+/target
+/target
