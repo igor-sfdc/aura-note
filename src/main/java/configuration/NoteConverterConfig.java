@@ -13,10 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-({
-	openNote: function(component, event, helper) {
-		$A.get("e.auranote:openNote").setParams({
-			note: component.get("v.note")
-		}).fire();
-	}
-})
+package configuration;
+import org.auraframework.demo.converters.StringToNoteConverter;
+import org.auraframework.demo.notes.Note;
+import org.auraframework.util.ServiceLoaderImpl.AuraConfiguration;
+import org.auraframework.util.ServiceLoaderImpl.Impl;
+import org.auraframework.util.type.Converter;
+
+@AuraConfiguration
+public class NoteConverterConfig {
+	
+	   @Impl
+	    public static Converter<String, Note> exampleTypeConverter() {
+	        return new StringToNoteConverter();
+	    }
+	
+}

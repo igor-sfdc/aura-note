@@ -11,7 +11,7 @@ The directions on how to set it up to run alongside Aura framework OSGi bundle a
 
 ## What is Aura-Note?
 
-Aura-Note is a simple note taking sample application that demonstrates many of the features and patterns used when building an Aura based application.
+Aura-Note is a simple note taking sample application that demonstrates many of the features and patterns used when building an Aura based application.  The [Aura 101 tutorial](https://github.com/forcedotcom/aura-note/blob/master/Aura101.pdf) walks you through building a component and putting it in the app.
 
 To find out more about Aura please see the [Aura Documentation](http://documentation.auraframework.org/auradocs) site or see the instructions at the end of this README for 
 accessing the documentation on your localhost after you build the project.
@@ -20,7 +20,7 @@ accessing the documentation on your localhost after you build the project.
 
 You need:
 
-* Java Development Kit (JDK) 1.6
+* JDK 1.7
 * Apache Maven 3
 
 ### Getting Started
