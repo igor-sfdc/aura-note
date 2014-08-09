@@ -33,7 +33,7 @@
     </licenses>
 
 	<properties>
-        <aura.framework.version>0.1318-SNAPSHOT</aura.framework.version>
+        <aura.framework.version>0.1327-SNAPSHOT</aura.framework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipUnitTests>true</skipUnitTests>
 	</properties>
@@ -64,6 +64,7 @@
             <groupId>biz.aQute</groupId>
             <artifactId>bnd</artifactId>
             <version>1.50.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
