@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD:src/main/java/org/auraframework/demo/providers/NotesClassProviderImpl.java
- * Copyright (C) 2013 salesforce.com, inc.
-=======
  * Copyright (C) 2014 salesforce.com, inc.
->>>>>>> upstream/master:src/test/java/org/auraframework/test/JSTests.java
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
