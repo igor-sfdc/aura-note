@@ -33,7 +33,7 @@
     </licenses>
 
 	<properties>
-        <aura.framework.version>0.1327-SNAPSHOT</aura.framework.version>
+        <aura.framework.version>0.1417-SNAPSHOT</aura.framework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipUnitTests>true</skipUnitTests>
 	</properties>
