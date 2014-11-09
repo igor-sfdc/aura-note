@@ -14,7 +14,7 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
             <comments>
-                  Copyright (C) 2014 salesforce.com, inc.
+                  Copyright (C) 2013 salesforce.com, inc.
                  
                   Licensed under the Apache License, Version 2.0 (the "License");
                   you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@
     <!-- these properties can be set by passing in -D<property_name>=<property_value> -->
     <properties>
         <!-- Update auraframework versions here to use more up-to-date versions -->
-        <aura.framework.version>0.1417-SNAPSHOT</aura.framework.version>
+        <aura.framework.version>0.1530-SNAPSHOT</aura.framework.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <aura.home>${basedir}</aura.home>
         <skipUnitTests>true</skipUnitTests>
