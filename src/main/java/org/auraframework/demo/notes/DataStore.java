@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 salesforce.com, inc.
+ * Copyright (C) 2014 salesforce.com, inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,60 +28,60 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 public class DataStore {
-	
-	private static final DataStore INSTANCE = new DataStore();
-	private static final String DB_URL = "jdbc:h2:~/auranote.db;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
-	
-	private ConnectionSource connectionSource;
-	
-	public static DataStore getInstance(){
-		return INSTANCE;
-	}
-	
-	private DataStore(){
-		try {
-			connectDatabase();
-			updateDatabase();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	private void connectDatabase() throws SQLException{
-		connectionSource = new JdbcPooledConnectionSource(DB_URL);
-	}
-	
-	private void updateDatabase() throws SQLException{
-		ConnectionSource connectionSource = getConnectionSource();
-		TableUtils.createTableIfNotExists(connectionSource, Note.class);
-		
-		JdbcDatabaseConnection connection = (JdbcDatabaseConnection)connectionSource.getReadWriteConnection();
-		try{
-			Connection jdbcConnection = connection.getInternalConnection();
-			
-			try{
-				FullText.createIndex(jdbcConnection, "PUBLIC", "NOTE", "TITLE,BODY");
-			}catch(Exception e){
-				//Probably already exists.
-			}
-			
-		}finally{
-			connectionSource.releaseConnection(connection);
-		}
-	}
-	
-	public ConnectionSource getConnectionSource() throws SQLException {
-		return connectionSource;
-	}
-	
-	public Dao<Note, Long> getNoteDao() throws SQLException{
-		
-		return DaoManager.createDao(getConnectionSource(), Note.class);
-	}
-	
-	public Connection getConnection() throws SQLException{
-		ConnectionSource connectionSource = getConnectionSource();
-		return ((JdbcDatabaseConnection)connectionSource.getReadWriteConnection()).getInternalConnection();
-	}
+
+    private static final DataStore INSTANCE = new DataStore();
+    private static final String DB_URL = "jdbc:h2:~/auranote.db;AUTO_SERVER=TRUE;IGNORECASE=TRUE";
+
+    private ConnectionSource connectionSource;
+
+    public static DataStore getInstance() {
+        return INSTANCE;
+    }
+
+    private DataStore() {
+        try {
+            connectDatabase();
+            updateDatabase();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void connectDatabase() throws SQLException {
+        connectionSource = new JdbcPooledConnectionSource(DB_URL);
+    }
+
+    private void updateDatabase() throws SQLException {
+        ConnectionSource connectionSource = getConnectionSource();
+        TableUtils.createTableIfNotExists(connectionSource, Note.class);
+
+        JdbcDatabaseConnection connection = (JdbcDatabaseConnection)connectionSource.getReadWriteConnection();
+        try {
+            Connection jdbcConnection = connection.getInternalConnection();
+
+            try {
+                FullText.createIndex(jdbcConnection, "PUBLIC", "NOTE", "TITLE,BODY");
+            } catch (Exception e) {
+                // Probably already exists.
+            }
+
+        } finally {
+            connectionSource.releaseConnection(connection);
+        }
+    }
+
+    public ConnectionSource getConnectionSource() throws SQLException {
+        return connectionSource;
+    }
+
+    public Dao<Note, Long> getNoteDao() throws SQLException {
+
+        return DaoManager.createDao(getConnectionSource(), Note.class);
+    }
+
+    public Connection getConnection() throws SQLException {
+        ConnectionSource connectionSource = getConnectionSource();
+        return ((JdbcDatabaseConnection)connectionSource.getReadWriteConnection()).getInternalConnection();
+    }
 
 }

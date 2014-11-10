@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 salesforce.com, inc.
+ * Copyright (C) 2014 salesforce.com, inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package configuration;
+
 import org.auraframework.demo.converters.StringToNoteConverter;
 import org.auraframework.demo.notes.Note;
 import org.auraframework.util.ServiceLoaderImpl.AuraConfiguration;
@@ -22,10 +23,10 @@ import org.auraframework.util.type.Converter;
 
 @AuraConfiguration
 public class NoteConverterConfig {
-	
-	   @Impl
-	    public static Converter<String, Note> exampleTypeConverter() {
-	        return new StringToNoteConverter();
-	    }
-	
+
+    @Impl
+    public static Converter<String, Note> exampleTypeConverter() {
+        return new StringToNoteConverter();
+    }
+
 }

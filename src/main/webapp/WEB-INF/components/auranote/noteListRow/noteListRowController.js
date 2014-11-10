@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 salesforce.com, inc.
+ * Copyright (C) 2014 salesforce.com, inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 ({
-	openNote: function(component, event, helper) {
-		$A.get("e.auranote:openNote").setParams({
-			note: component.get("v.note")
-		}).fire();
-	}
+    openNote: function(component, event, helper) {
+        $A.get("e.auranote:openNote").setParams({
+            mode: "view",
+            note: component.get("v.note")
+        }).fire();
+    }
 })

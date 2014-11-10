@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 salesforce.com, inc.
+ * Copyright (C) 2014 salesforce.com, inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.j256.ormlite.dao.DaoManager;
 
 @Model
 public class TestNoteListModel {
+
     private static AtomicLong count = new AtomicLong();
     private String key = "test" + count.getAndIncrement() + System.currentTimeMillis();
 
@@ -52,4 +53,5 @@ public class TestNoteListModel {
         note.setBody(body);
         noteDao.create(note);
     }
+
 }

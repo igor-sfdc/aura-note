@@ -14,7 +14,7 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
             <comments>
-                  Copyright (C) 2013 salesforce.com, inc.
+                  Copyright (C) 2014 salesforce.com, inc.
                  
                   Licensed under the Apache License, Version 2.0 (the "License");
                   you may not use this file except in compliance with the License.
@@ -28,29 +28,55 @@
                   See the License for the specific language governing permissions and
                   limitations under the License.
             </comments>
-        </license>
-    </licenses>
+		</license>
+	</licenses>
 
-    <!-- these properties can be set by passing in -D<property_name>=<property_value> -->
-    <properties>
-        <!-- Update auraframework versions here to use more up-to-date versions -->
-        <aura.framework.version>0.1530-SNAPSHOT</aura.framework.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aura.home>${basedir}</aura.home>
-        <skipUnitTests>true</skipUnitTests>
-    </properties>
+	<!-- these properties can be set by passing in -D<property_name>=<property_value> -->
+	<properties>
+		<aura.framework.version>0.1530-SNAPSHOT</aura.framework.version>
+		<selenium.version>2.43.1</selenium.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<webdriver.chrome.driver>${basedir}/bin/chromedriverlauncher</webdriver.chrome.driver>
+		<chromedriver.url>http://chromedriver.storage.googleapis.com/{version}/{artifactId}_{classifier}.zip</chromedriver.url>
+		<chromedriver.version>2.9</chromedriver.version>
+		<webdriver.reusebrowser>true</webdriver.reusebrowser>
+		<webdriver.remote.server /> <!-- http://localhost:4444/wd/hub/ -->
+		<webdriver.reusebrowser>true</webdriver.reusebrowser>
+		<webdriver.browser.type>GOOGLECHROME</webdriver.browser.type> <!-- refer to org.auraframework.test.WebDriverUtil.BrowserType enums for 
+			valid values -->
+		<sauce.record.video>false</sauce.record.video>
+		<sauce.record.screenshots>false</sauce.record.screenshots>
+		<xdisplay.exec>Xvfb</xdisplay.exec>
+		<xdisplay.options>-ac</xdisplay.options>
+		<xdisplay.size>960x640</xdisplay.size>
+		<jetty.idleWait>60000</jetty.idleWait>
+		<jetty.scanInterval>0</jetty.scanInterval>
+		<aura.home>${basedir}</aura.home>
+		<skipUnitTests>false</skipUnitTests>
+	</properties>
 
-    <repositories>
-        <repository>
-            <id>libs-internal</id>
-            <url>http://maven.auraframework.org/libs-release</url>
-        </repository>
-        
-        <repository>
-            <id>libs</id>
-            <url>http://repo.auraframework.org/libs-release</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>libs-internal</id>
+			<url>http://maven.auraframework.org/libs-release</url>
+		</repository>
+
+		<repository>
+			<id>libs</id>
+			<url>http://repo.auraframework.org/libs-release</url>
+		</repository>
+
+		<repository>
+			<snapshots />
+			<id>repo.auraframework.org-chromedriver</id>
+			<url>http://repo.auraframework.org/chromedriver</url>
+		</repository>
+
+		<repository>
+			<id>phloc.com</id>
+			<url>http://repo.phloc.com/maven2</url>
+		</repository>
+	</repositories>
 
     <dependencies>
         <dependency>
@@ -272,7 +298,8 @@
                                     	<include>img/**</include>
                                     	<include>index.html</include>
                                     </includes>
-                                    <filtering>true</filtering>
+                                    <!-- Set to false b/c of filtering bug in the plugin -->
+                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
