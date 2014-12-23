@@ -13,42 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.auraframework.demo.notes.controllers;
+package org.auraframework.demo.notes.models;
 
-import org.auraframework.demo.notes.DataStore;
-import org.auraframework.demo.notes.Note;
 import org.auraframework.ds.log.AuraDSLogService;
-import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Controller;
-import org.auraframework.system.Annotations.Key;
-
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
+import org.auraframework.ds.servicecomponent.ModelInitializationException;
+import org.auraframework.service.ContextService;
 
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
 
-@Controller(useAdapter = true)
 @Component
-public class NoteViewController implements org.auraframework.ds.servicecomponent.Controller {
+public class NoteListModelFactory implements org.auraframework.ds.servicecomponent.ModelFactory<NoteListModel> {
 
-    private AuraDSLogService logService;
+    private transient ContextService contextService;
 
     @Reference
-    protected void setLogService(AuraDSLogService logServiceValue) {
+    void setContextService(ContextService contextService) {
+        this.contextService = contextService;
+    }
+
+    private transient AuraDSLogService logService;
+
+    @Reference
+    void setLogService(AuraDSLogService logServiceValue) {
         logService = logServiceValue;
     }
 
     @Activate
-    protected void activate() {
+    void activate() throws Exception {
         logService.debug("Activated new instance of: " + this.getClass().getName() + this);
     }
 
-    @AuraEnabled
-    public void deleteNote(@Key("id") Long id, @Key("sort") String sort) throws Exception {
-        Dao<Note, Long> noteDao = DaoManager.createDao(DataStore.getInstance().getConnectionSource(), Note.class);
-        noteDao.deleteById(id);
+    @Override
+    public NoteListModel modelInstance() throws ModelInitializationException {
+        try {
+            return new NoteListModel(contextService, logService);
+        } catch (Exception e) {
+            throw new ModelInitializationException("Failed to create component instance", e);
+        }
     }
 
 }

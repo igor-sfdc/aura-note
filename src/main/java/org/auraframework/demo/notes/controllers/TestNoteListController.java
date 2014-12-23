@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import org.auraframework.demo.notes.DataStore;
 import org.auraframework.demo.notes.Note;
+import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.system.Annotations.AuraEnabled;
 import org.auraframework.system.Annotations.Controller;
 import org.auraframework.system.Annotations.Key;
@@ -30,18 +31,35 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.dao.GenericRawResults;
 
-@Controller
-public class TestNoteListController {
+import aQute.bnd.annotation.component.Activate;
+import aQute.bnd.annotation.component.Reference;
 
-    private static String replaceAllRegex(String source, String pattern, String replacement) {
-        if (source == null) return null;
+@Controller(useAdapter = true)
+public class TestNoteListController implements org.auraframework.ds.servicecomponent.Controller {
+
+    private AuraDSLogService logService;
+
+    @Reference
+    protected void setLogService(AuraDSLogService logServiceValue) {
+        logService = logServiceValue;
+    }
+
+    @Activate
+    protected void activate() {
+        logService.debug("Activated new instance of: " + this.getClass().getName() + this);
+    }
+
+    private String replaceAllRegex(String source, String pattern, String replacement) {
+        if (source == null) {
+            return null;
+        }
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(source);
         return matcher.replaceAll(replacement);
     }
 
     @AuraEnabled
-    public static void deleteNotesByKey(@Key("key") String key) throws Exception {
+    public void deleteNotesByKey(@Key("key") String key) throws Exception {
         Dao<Note, Long> noteDao = DaoManager.createDao(DataStore.getInstance().getConnectionSource(), Note.class);
         List<Long> ids = Lists.newArrayList();
         GenericRawResults<String[]> searchResults = noteDao.queryRaw("SELECT KEYS FROM FT_SEARCH_DATA(?,0,0)", key);
