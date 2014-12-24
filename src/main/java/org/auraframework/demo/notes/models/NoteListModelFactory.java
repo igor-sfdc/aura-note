@@ -22,8 +22,10 @@ import org.auraframework.service.ContextService;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelFactory;
 
 @Component
+@ServiceComponentModelFactory
 public class NoteListModelFactory implements org.auraframework.ds.servicecomponent.ModelFactory<NoteListModel> {
 
     private transient ContextService contextService;

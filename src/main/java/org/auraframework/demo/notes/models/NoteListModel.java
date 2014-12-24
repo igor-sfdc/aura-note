@@ -25,13 +25,14 @@ import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.instance.BaseComponent;
 import org.auraframework.service.ContextService;
 import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Model;
 import org.auraframework.util.AuraTextUtil;
 
 import com.google.common.collect.Lists;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
+
+import ui.aura.servicecomponent.Annotations.ServiceComponentModel;
 
 enum SortCol {
     title, createdOn
@@ -41,7 +42,7 @@ enum SortDir {
     asc, desc
 }
 
-@Model(useAdapter = true)
+@ServiceComponentModel
 public class NoteListModel implements org.auraframework.ds.servicecomponent.Model {
 
     private final List<Note> notes;

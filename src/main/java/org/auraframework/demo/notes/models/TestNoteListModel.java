@@ -21,15 +21,15 @@ import org.auraframework.demo.notes.DataStore;
 import org.auraframework.demo.notes.Note;
 import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Model;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Reference;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModel;
 
-@Model(useAdapter = true)
+@ServiceComponentModel
 public class TestNoteListModel implements org.auraframework.ds.servicecomponent.Model {
 
     private transient AuraDSLogService logService;

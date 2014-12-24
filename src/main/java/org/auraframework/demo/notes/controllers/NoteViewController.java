@@ -19,7 +19,6 @@ import org.auraframework.demo.notes.DataStore;
 import org.auraframework.demo.notes.Note;
 import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Controller;
 import org.auraframework.system.Annotations.Key;
 
 import com.j256.ormlite.dao.Dao;
@@ -28,8 +27,9 @@ import com.j256.ormlite.dao.DaoManager;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
+import ui.aura.servicecomponent.Annotations.ServiceComponentController;
 
-@Controller(useAdapter = true)
+@ServiceComponentController
 @Component
 public class NoteViewController implements org.auraframework.ds.servicecomponent.Controller {
 

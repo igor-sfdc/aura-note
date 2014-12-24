@@ -21,8 +21,10 @@ import org.auraframework.ds.servicecomponent.ModelInitializationException;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelFactory;
 
 @Component
+@ServiceComponentModelFactory
 public class TestNoteListModelFactory implements org.auraframework.ds.servicecomponent.ModelFactory<TestNoteListModel> {
 
     private transient AuraDSLogService logService;
