@@ -27,10 +27,10 @@ import com.j256.ormlite.dao.DaoManager;
 
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Reference;
-import ui.aura.servicecomponent.Annotations.ServiceComponentModel;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelInstance;
 
-@ServiceComponentModel
-public class TestNoteListModel implements org.auraframework.ds.servicecomponent.Model {
+@ServiceComponentModelInstance
+public class TestNoteListModel implements org.auraframework.ds.servicecomponent.ModelInstance {
 
     private transient AuraDSLogService logService;
 

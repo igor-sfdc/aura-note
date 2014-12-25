@@ -32,7 +32,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-import ui.aura.servicecomponent.Annotations.ServiceComponentModel;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelInstance;
 
 enum SortCol {
     title, createdOn
@@ -42,8 +42,8 @@ enum SortDir {
     asc, desc
 }
 
-@ServiceComponentModel
-public class NoteListModel implements org.auraframework.ds.servicecomponent.Model {
+@ServiceComponentModelInstance
+public class NoteListModel implements org.auraframework.ds.servicecomponent.ModelInstance {
 
     private final List<Note> notes;
     private final AuraDSLogService logService;
