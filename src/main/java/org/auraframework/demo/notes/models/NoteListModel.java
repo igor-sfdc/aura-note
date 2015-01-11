@@ -19,12 +19,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.auraframework.Aura;
 import org.auraframework.demo.notes.DataStore;
 import org.auraframework.demo.notes.Note;
+import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.instance.BaseComponent;
+import org.auraframework.service.ContextService;
 import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Model;
 import org.auraframework.util.AuraTextUtil;
 
 import com.google.common.collect.Lists;
@@ -32,31 +32,40 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
 
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelInstance;
+
 enum SortCol {
     title, createdOn
-};
+}
 
 enum SortDir {
     asc, desc
 }
 
-@Model
-public class NoteListModel {
+@ServiceComponentModelInstance
+public class NoteListModel implements org.auraframework.ds.servicecomponent.ModelInstance {
 
+    private final List<Note> notes;
+    private final AuraDSLogService logService;
     private static DataStore dataStore = DataStore.getInstance();
-    private List<Note> notes;
 
     private static String replaceAllRegex(String source, String pattern, String replacement) {
-        if (source == null) return null;
+        if (source == null) {
+            return null;
+        }
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(source);
         return matcher.replaceAll(replacement);
     }
 
-    public NoteListModel() throws Exception {
+    NoteListModel(ContextService contextService, AuraDSLogService logServiceValue) throws Exception {
+
+        // An example of injecting a service into a model instance
+        this.logService = logServiceValue;
+
         Dao<Note, Long> noteDao = dataStore.getNoteDao();
 
-        BaseComponent<?, ?> cmp = Aura.getContextService().getCurrentContext().getCurrentComponent();
+        BaseComponent<?, ?> cmp = contextService.getCurrentContext().getCurrentComponent();
 
         List<String> sortSplit = AuraTextUtil.splitSimple(".", (String)cmp.getAttributes().getValue("sort"));
 
@@ -93,6 +102,8 @@ public class NoteListModel {
         if (notes.isEmpty()) {
             notes.add(new Note("Sample Note", "Just a simple note to let you know <h1>Aura</h1> loves you!"));
         }
+
+        logService.debug("Instantiated model for : " + this.getClass().getName());
     }
 
     @AuraEnabled

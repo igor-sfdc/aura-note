@@ -19,18 +19,36 @@ import java.math.BigDecimal;
 
 import org.auraframework.demo.notes.DataStore;
 import org.auraframework.demo.notes.Note;
+import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Controller;
 import org.auraframework.system.Annotations.Key;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 
-@Controller
-public class NoteEditController {
+import aQute.bnd.annotation.component.Activate;
+import aQute.bnd.annotation.component.Component;
+import aQute.bnd.annotation.component.Reference;
+import ui.aura.servicecomponent.Annotations.ServiceComponentController;
+
+@ServiceComponentController
+@Component
+public class NoteEditController implements org.auraframework.ds.servicecomponent.Controller {
+
+    private AuraDSLogService logService;
+
+    @Reference
+    protected void setLogService(AuraDSLogService logServiceValue) {
+        logService = logServiceValue;
+    }
+
+    @Activate
+    protected void activate() {
+        logService.debug("Activated new instance of: " + this.getClass().getName() + this);
+    }
 
     @AuraEnabled
-    public static Note saveNote(@Key("id") Long id,
+    public Note saveNote(@Key("id") Long id,
             @Key("title") String title,
             @Key("body") String body,
             @Key("sort") String sort,

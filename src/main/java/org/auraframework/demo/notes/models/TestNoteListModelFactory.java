@@ -13,27 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.auraframework.demo.notes.controllers;
+package org.auraframework.demo.notes.models;
 
-import org.auraframework.demo.notes.DataStore;
-import org.auraframework.demo.notes.Note;
 import org.auraframework.ds.log.AuraDSLogService;
-import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Key;
-
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
+import org.auraframework.ds.servicecomponent.ModelInitializationException;
 
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Reference;
-import ui.aura.servicecomponent.Annotations.ServiceComponentController;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelFactory;
 
-@ServiceComponentController
 @Component
-public class NoteViewController implements org.auraframework.ds.servicecomponent.Controller {
+@ServiceComponentModelFactory
+public class TestNoteListModelFactory implements org.auraframework.ds.servicecomponent.ModelFactory<TestNoteListModel> {
 
-    private AuraDSLogService logService;
+    private transient AuraDSLogService logService;
 
     @Reference
     protected void setLogService(AuraDSLogService logServiceValue) {
@@ -41,14 +35,17 @@ public class NoteViewController implements org.auraframework.ds.servicecomponent
     }
 
     @Activate
-    protected void activate() {
+    void activate() throws Exception {
         logService.debug("Activated new instance of: " + this.getClass().getName() + this);
     }
 
-    @AuraEnabled
-    public void deleteNote(@Key("id") Long id, @Key("sort") String sort) throws Exception {
-        Dao<Note, Long> noteDao = DaoManager.createDao(DataStore.getInstance().getConnectionSource(), Note.class);
-        noteDao.deleteById(id);
+    @Override
+    public TestNoteListModel modelInstance() throws ModelInitializationException {
+        try {
+            return new TestNoteListModel();
+        } catch (Exception e) {
+            throw new ModelInitializationException("Failed to create component instance", e);
+        }
     }
 
 }

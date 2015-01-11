@@ -19,17 +19,33 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.auraframework.demo.notes.DataStore;
 import org.auraframework.demo.notes.Note;
+import org.auraframework.ds.log.AuraDSLogService;
 import org.auraframework.system.Annotations.AuraEnabled;
-import org.auraframework.system.Annotations.Model;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 
-@Model
-public class TestNoteListModel {
+import aQute.bnd.annotation.component.Activate;
+import aQute.bnd.annotation.component.Reference;
+import ui.aura.servicecomponent.Annotations.ServiceComponentModelInstance;
+
+@ServiceComponentModelInstance
+public class TestNoteListModel implements org.auraframework.ds.servicecomponent.ModelInstance {
+
+    private transient AuraDSLogService logService;
+
+    @Reference
+    protected void setLogService(AuraDSLogService logServiceValue) {
+        logService = logServiceValue;
+    }
+
+    @Activate
+    protected void activate() {
+        logService.debug("Activated new instance of: " + this.getClass().getName() + this);
+    }
 
     private static AtomicLong count = new AtomicLong();
-    private String key = "test" + count.getAndIncrement() + System.currentTimeMillis();
+    private final String key = "test" + count.getAndIncrement() + System.currentTimeMillis();
 
     public TestNoteListModel() throws Exception {
         createNote("created first", key);

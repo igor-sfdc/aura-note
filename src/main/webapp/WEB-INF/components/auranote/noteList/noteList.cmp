@@ -15,7 +15,7 @@
     limitations under the License.
 
 -->
-<aura:component model="java://org.auraframework.demo.notes.models.NoteListModel">
+<aura:component model="serviceComponent://org.auraframework.demo.notes.models.NoteListModel">
     <aura:attribute name="sort" type="String" default="createdOn.desc"/>
     <aura:attribute name="query" type="String"/>
 

@@ -15,7 +15,7 @@
     limitations under the License.
 
 -->
-<aura:component extends="auranote:note" controller="java://org.auraframework.demo.notes.controllers.NoteViewController">
+<aura:component extends="auranote:note" controller="serviceComponent://org.auraframework.demo.notes.controllers.NoteViewController">
     <aura:set attribute="masked" value="true"/>
     <aura:set attribute="buttons">
         <ui:button label="Edit" press="{!c.edit}" class="edit_t"/>
